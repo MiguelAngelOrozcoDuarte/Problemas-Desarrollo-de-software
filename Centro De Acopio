@@ -1,0 +1,61 @@
+Algoritmo CentroDeAcopio
+    Definir opcion, tipo Como Entero
+    Definir peso, tarifa, subtotal, ajuste, total Como Real
+    Definir kg_total, dinero_total, mayor_peso Como Real
+	
+    kg_total = 0
+    dinero_total = 0
+    mayor_peso = 0
+	
+    Repetir
+        Escribir "1. Registrar lote"
+        Escribir "2. Ver resumen"
+        Escribir "3. Salir"
+        Leer opcion
+		
+        Segun opcion Hacer
+            1:
+                Escribir "Tipo de fruta: 1=A, 2=B"
+                Leer tipo
+                Escribir "Peso en kg:"
+                Leer peso
+				
+                Mientras peso <= 0 Hacer
+                    Escribir "El peso debe ser mayor que 0"
+                    Leer peso
+                FinMientras
+				
+                Si tipo = 1 Entonces
+                    tarifa = 3500
+                SiNo
+                    tarifa = 2200
+                FinSi
+				
+                subtotal = peso * tarifa
+                ajuste = 0
+				
+                Si tipo = 1 Y peso > 500 Entonces
+                    ajuste = subtotal * 0.05
+                FinSi
+				
+                Si tipo = 2 Y peso < 100 Entonces
+                    ajuste = -subtotal * 0.03
+                FinSi
+				
+                total = subtotal + ajuste
+                kg_total = kg_total + peso
+                dinero_total = dinero_total + total
+				
+                Si peso > mayor_peso Entonces
+                    mayor_peso = peso
+                FinSi
+				
+                Escribir "Pago total: ", total
+				
+            2:
+                Escribir "Kg totales: ", kg_total
+                Escribir "Dinero total: ", dinero_total
+                Escribir "Lote más pesado: ", mayor_peso
+        FinSegun
+    Hasta Que opcion = 3
+FinAlgoritmo
