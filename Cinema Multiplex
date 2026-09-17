@@ -1,0 +1,73 @@
+Algoritmo CinemaMultiplex
+    Definir capacidad, opcion, categoria, cantidad Como Entero
+    Definir precio, subtotal, descuento, total, recaudo Como Real
+    Definir generales, estudiantes, desc_promociones Como Entero
+	
+    Escribir "Capacidad inicial:"
+    Leer capacidad
+	
+    Mientras capacidad < 1 O capacidad > 80 Hacer
+        Escribir "Capacidad inválida"
+        Leer capacidad
+    FinMientras
+	
+    recaudo = 0
+    generales = 0
+    estudiantes = 0
+    desc_promociones = 0
+	
+    Repetir
+        Escribir "1. Venta de entradas"
+        Escribir "2. Ver estado"
+        Escribir "3. Cerrar sistema"
+        Leer opcion
+		
+        Segun opcion Hacer
+            1:
+                Escribir "Categoría: 1=General, 2=Estudiante"
+                Leer categoria
+                Escribir "Cantidad:"
+                Leer cantidad
+				
+                Mientras cantidad <= 0 Hacer
+                    Escribir "Cantidad inválida"
+                    Leer cantidad
+                FinMientras
+				
+                Si cantidad > capacidad Entonces
+                    Escribir "No hay suficientes puestos"
+                SiNo
+                    Si categoria = 1 Entonces
+                        precio = 12000
+                    SiNo
+                        precio = 8000
+                    FinSi
+					
+                    subtotal = cantidad * precio
+					
+                    Si cantidad >= 4 Entonces
+                        descuento = subtotal * 0.10
+                        desc_promociones = desc_promociones + 1
+                    SiNo
+                        descuento = 0
+                    FinSi
+					
+                    total = subtotal - descuento
+                    capacidad = capacidad - cantidad
+                    recaudo = recaudo + total
+					
+                    Si categoria = 1 Entonces
+                        generales = generales + cantidad
+                    SiNo
+                        estudiantes = estudiantes + cantidad
+                    FinSi
+					
+                    Escribir "Total: ", total
+                FinSi
+				
+            2:
+                Escribir "Puestos disponibles: ", capacidad
+                Escribir "Recaudo: ", recaudo
+        FinSegun
+    Hasta Que opcion = 3
+FinAlgoritmo
