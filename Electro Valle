@@ -1,0 +1,68 @@
+Algoritmo ElectroValle
+    Definir opcion, categoria Como Entero
+    Definir consumo, tarifa, subtotal, ajuste, total Como Real
+    Definir total_kwh, total_facturado, max_consumo Como Real
+    Definir residenciales, comerciales Como Entero
+	
+    total_kwh = 0
+    total_facturado = 0
+    max_consumo = 0
+    residenciales = 0
+    comerciales = 0
+	
+    Repetir
+        Escribir "1. Registrar lectura"
+        Escribir "2. Generar informe"
+        Escribir "3. Salir"
+        Leer opcion
+		
+        Segun opcion Hacer
+            1:
+                Escribir "Categoría: 1=Residencial, 2=Comercial"
+                Leer categoria
+                Escribir "Consumo en kWh:"
+                Leer consumo
+				
+                Mientras consumo < 0 Hacer
+                    Escribir "El consumo no puede ser negativo"
+                    Leer consumo
+                FinMientras
+				
+                Si categoria = 1 Entonces
+                    tarifa = 600
+                    residenciales = residenciales + 1
+                SiNo
+                    tarifa = 900
+                    comerciales = comerciales + 1
+                FinSi
+				
+                subtotal = consumo * tarifa
+                ajuste = 0
+				
+                Si categoria = 1 Y consumo <= 150 Entonces
+                    ajuste = -subtotal * 0.12
+                FinSi
+				
+                Si categoria = 2 Y consumo > 500 Entonces
+                    ajuste = subtotal * 0.15
+                FinSi
+				
+                total = subtotal + ajuste
+                total_kwh = total_kwh + consumo
+                total_facturado = total_facturado + total
+				
+                Si consumo > max_consumo Entonces
+                    max_consumo = consumo
+                FinSi
+				
+                Escribir "Total a pagar: ", total
+				
+            2:
+                Escribir "Total kWh: ", total_kwh
+                Escribir "Total facturado: ", total_facturado
+                Escribir "Residenciales: ", residenciales
+                Escribir "Comerciales: ", comerciales
+                Escribir "Mayor consumo: ", max_consumo
+        FinSegun
+    Hasta Que opcion = 3
+FinAlgoritmo
